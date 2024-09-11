@@ -1,25 +1,20 @@
-module metaschool::calculator_l05
-{
-    use std::string::{String,utf8};
-    use std::signer;
+module metaschool::calculator {
 
-    struct Message has key
-    {
-        my_message : String
+    struct Topping has store {
+        want: bool,
     }
 
-    public entry fun create_message(account: &signer)
-    {
-        if (!exists<Message>(signer::address_of(account))){
-            let message = Message {
-                my_message : utf8(b"I am a Calculator Dapp")            
-            };
-            move_to(account,message);    
-        }
+    struct Pizza has key {
+        price: u64,
+        toppings: Topping,
     }
 
-    public fun get_message(account: &signer): String acquires Message {
-        let calculator = borrow_global<Message>(signer::address_of(account));
-        calculator.my_message
+    fun create_prizza(account: &signer) {
+        let topping = Topping { want: true };
+        let pizza = Pizza { price: 50, toppings: topping };
+
+        let byte_string: vector<u8> = b"Hello World"; 
+
+        move_to(account, pizza);
     }
 }

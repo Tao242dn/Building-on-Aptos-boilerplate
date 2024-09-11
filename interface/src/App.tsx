@@ -22,8 +22,6 @@ const client = new Aptos(aptosConfig);
 
 const moduleName = process.env.REACT_APP_MODULE_NAME;
 const moduleAddress = process.env.REACT_APP_MODULE_ADDRESS;
-console.log(moduleAddress)
-console.log(moduleName)
 
 const WindowWrapper = styled.div`
   display: flex;
